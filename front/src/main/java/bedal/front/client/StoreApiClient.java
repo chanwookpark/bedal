@@ -2,6 +2,7 @@ package bedal.front.client;
 
 import bedal.model.store.Store;
 import bedal.model.store.StoreList;
+import com.netflix.hystrix.contrib.javanica.annotation.HystrixCommand;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Service;
@@ -21,6 +22,7 @@ public class StoreApiClient {
 
     RestTemplate template = new RestTemplate();
 
+    @HystrixCommand(groupKey = "store", fallbackMethod = "fallbackForFindLst")
     public StoreList findList() {
         StoreList storeList =
                 template.getForObject(API_HOST_W_STORE + "/store/list", StoreList.class);
@@ -29,10 +31,25 @@ public class StoreApiClient {
         return storeList;
     }
 
+    @HystrixCommand(groupKey = "store", fallbackMethod = "fallbackForFindOne")
     public Store findOne(String storeId) {
         Store store = template.getForObject(API_HOST_W_STORE + "/store/single?storeId={storeId}", Store.class, storeId);
 
         logger.debug("가게정보 1개 조회 {}", storeId);
         return store;
+    }
+
+    public StoreList fallbackForFindLst() {
+
+        logger.error("Executing fallback method... (fallbackForFindList)");
+
+        return new StoreList();
+    }
+
+    public Store fallbackForFindOne(String storeId) {
+
+        logger.error("Executing fallback method... (fallbackForFindOne, storeId={}", storeId);
+
+        return new Store();
     }
 }
