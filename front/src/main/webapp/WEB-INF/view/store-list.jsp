@@ -9,6 +9,11 @@
 </head>
 <body>
 
+<!-- 배너 영역 노출 -->
+<c:if test="${banner != null}">
+    <img src="${banner.bannerImageUrl}" alt="${banner.eventTitle}"/>
+</c:if>
+
 <h3>우리동네가게</h3>
 <c:forEach var="store" items="${storeList.list}">
     <p>
@@ -16,7 +21,7 @@
             <strong>${store.storeName}</strong> <i>${store.promotionTitle}</i>
         </a>
         <br/>
-        ${store.storeAddress}
+            ${store.storeAddress}
     </p>
 </c:forEach>
 

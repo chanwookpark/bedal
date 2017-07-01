@@ -1,4 +1,4 @@
-package bedal.front.client;
+package bedal.front.api;
 
 import bedal.model.store.Store;
 import bedal.model.store.StoreList;
@@ -8,7 +8,7 @@ import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Service;
 import org.springframework.web.client.RestTemplate;
 
-import static bedal.front.client.ApiHostConstants.API_HOST_W_STORE;
+import static bedal.front.api.ApiHostConstants.API_HOST_W_STORE;
 
 /**
  * Store API의 클라이언트 서비스
@@ -16,9 +16,9 @@ import static bedal.front.client.ApiHostConstants.API_HOST_W_STORE;
  * @author chanwook
  */
 @Service
-public class StoreApiClient {
+public class StoreApiService {
 
-    private final Logger logger = LoggerFactory.getLogger(StoreApiClient.class);
+    private final Logger logger = LoggerFactory.getLogger(StoreApiService.class);
 
     RestTemplate template = new RestTemplate();
 

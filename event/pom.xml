@@ -9,7 +9,7 @@
     </parent>
     <modelVersion>4.0.0</modelVersion>
 
-    <artifactId>store</artifactId>
+    <artifactId>event</artifactId>
 
     <dependencies>
         <dependency>
@@ -27,4 +27,5 @@
             </plugin>
         </plugins>
     </build>
+
 </project>

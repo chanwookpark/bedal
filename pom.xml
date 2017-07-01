@@ -12,6 +12,7 @@
         <module>front</module>
         <module>store</module>
         <module>model</module>
+        <module>event</module>
     </modules>
     <packaging>pom</packaging>
 
