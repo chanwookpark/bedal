@@ -13,6 +13,7 @@
         <module>store</module>
         <module>model</module>
         <module>event</module>
+        <module>hystrixdashboard</module>
     </modules>
     <packaging>pom</packaging>
 
