@@ -2,6 +2,7 @@ package bedal.front.api;
 
 import bedal.model.event.EventBanner;
 import com.netflix.hystrix.contrib.javanica.annotation.HystrixCommand;
+import com.netflix.hystrix.contrib.javanica.annotation.HystrixProperty;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Service;
@@ -19,7 +20,12 @@ public class EventApiService {
 
     RestTemplate template = new RestTemplate();
 
-    @HystrixCommand(groupKey = "event", fallbackMethod = "fallbackForFindEventBanner")
+    @HystrixCommand(groupKey = "event",
+            fallbackMethod = "fallbackForFindEventBanner",
+            commandProperties = {
+                    @HystrixProperty(name = "execution.isolation.thread.timeoutInMilliseconds", value = "300")
+            }
+    )
     public EventBanner findEventBanner(String eventId) {
         final String url = API_HOST_W_EVENT + "/event/single/banner?eventId={eventId}";
         final EventBanner eventBanner = template.getForObject(url, EventBanner.class, eventId);
@@ -30,8 +36,7 @@ public class EventApiService {
     }
 
     public EventBanner fallbackForFindEventBanner(String eventId) {
-        logger.error("Executing fallback method for findEventBanner!");
-
+        logger.error("Executing fallback method for findEventBanner!(id : {})", eventId);
         return null;
     }
 }

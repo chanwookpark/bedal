@@ -17,7 +17,10 @@ public class EventApiController {
      * @return
      */
     @GetMapping("/event/single/banner")
-    public EventBanner getBannerForEvent(@RequestParam String eventId) {
+    public EventBanner getBannerForEvent(@RequestParam String eventId) throws InterruptedException {
+
+        // Hystrix 테스트 용
+        // Thread.sleep(Long.MAX_VALUE);
 
         //FIXME 우선 여기서 간단히 리턴
         final EventBanner eventBanner = new EventBanner();
