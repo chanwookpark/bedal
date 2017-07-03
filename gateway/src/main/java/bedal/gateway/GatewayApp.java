@@ -8,9 +8,9 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
+import org.springframework.cloud.client.discovery.EnableDiscoveryClient;
 import org.springframework.cloud.netflix.zuul.EnableZuulProxy;
 import org.springframework.context.ConfigurableApplicationContext;
-import org.springframework.context.annotation.PropertySource;
 
 import java.io.File;
 
@@ -19,7 +19,7 @@ import java.io.File;
  */
 @EnableZuulProxy
 @SpringBootApplication
-@PropertySource(value = {"/application.properties", "/application-api-url.properties"})
+@EnableDiscoveryClient
 public class GatewayApp {
 
     private static final Logger logger = LoggerFactory.getLogger(GatewayApp.class);
